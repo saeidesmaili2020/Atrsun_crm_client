@@ -56,7 +56,7 @@ function calculateDiscounts(details: any[]) {
 export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
-
+     console.log(data); 
     // const browser = await puppeteer.launch({ headless: true });
     // const page = await browser.newPage();
     // await page.setCacheEnabled(false);
