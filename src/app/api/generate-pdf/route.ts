@@ -1,4 +1,4 @@
-import puppeteer from 'puppeteer';
+//import puppeteer from 'puppeteer';
 import { NextRequest, NextResponse } from 'next/server';
 
 function toPersianNumbers(input: string | number): string {
@@ -57,35 +57,35 @@ export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
 
-    const browser = await puppeteer.launch({ headless: true });
-    const page = await browser.newPage();
-    await page.setCacheEnabled(false);
+    // const browser = await puppeteer.launch({ headless: true });
+    // const page = await browser.newPage();
+    // await page.setCacheEnabled(false);
 
-    const htmlContent = generateInvoiceHTML(data);
+    // const htmlContent = generateInvoiceHTML(data);
 
-    await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+    // await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
 
-    const pdfBuffer = await page.pdf({
-      format: 'A4',
-      printBackground: true,
-      margin: {
-        top: '1cm',
-        right: '1cm',
-        bottom: '1cm',
-        left: '1cm'
-      }
-    });
+    // const pdfBuffer = await page.pdf({
+    //   format: 'A4',
+    //   printBackground: true,
+    //   margin: {
+    //     top: '1cm',
+    //     right: '1cm',
+    //     bottom: '1cm',
+    //     left: '1cm'
+    //   }
+    // });
 
-    await browser.close();
+    // await browser.close();
 
-    return new NextResponse(Buffer.from(pdfBuffer), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="invoice-p-${data.id}.pdf"`,
-        'Cache-Control': 'no-store, max-age=0'
-      },
-    });
+    // return new NextResponse(Buffer.from(pdfBuffer), {
+    //   status: 200,
+    //   headers: {
+    //     'Content-Type': 'application/pdf',
+    //     'Content-Disposition': `attachment; filename="invoice-p-${data.id}.pdf"`,
+    //     'Cache-Control': 'no-store, max-age=0'
+    //   },
+    // });
   } catch (error) {
     console.error('Error generating PDF:', error);
     return NextResponse.json({ error: 'Failed to generate PDF' }, { status: 500 });
